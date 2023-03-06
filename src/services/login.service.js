@@ -1,5 +1,7 @@
 const { User } = require('../models');
 
+const getByUserEmail = (email) => User.findOne({ where: { email } });
+
 const getAll = async () => {
   const usuarios = await User.findAll();
 
@@ -8,16 +10,12 @@ const getAll = async () => {
 
 const login = async (email, password) => {
   const usuario = await User.findOne({
-    where: { email, password },
+    where: { email },
   });
-
-  if (!usuario) {
+  
+  if (!usuario || usuario.password !== password) {
     return { type: 'INVALID_FIELDS', message: 'Invalid fields' };
   }
-
-  // if (!usuario || usuario.password !== password) {
-  //   return { type: 'INVALID_FIELDS', message: 'Invalid fields' };
-  // }
 
   return { type: null, message: usuario };
 };
@@ -25,4 +23,5 @@ const login = async (email, password) => {
 module.exports = {
   login,
   getAll,
+  getByUserEmail,
 };

@@ -1,8 +1,28 @@
-const { loginService } = require('../services');
-require('dotenv/config');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
-// const secret = process.env.JWT_SECRET;
+const {
+  loginService,
+} = require('../services');
+
+const {
+  JWT_SECRET,
+} = process.env;
+
+const criandoToken = (dadoObjeto) => {
+  const jwtConfig = {
+    expiresIn: '10d',
+    algorithm: 'HS256',
+  };
+
+  const payload = {
+    id: dadoObjeto.id,
+    email: dadoObjeto.email,
+  };
+
+  const token = jwt.sign(payload, JWT_SECRET, jwtConfig);
+
+  return token;
+};
 
 const getAll = async (req, res) => {
   const usuariosCadastrado = await loginService.getAll();
@@ -16,11 +36,12 @@ const login = async (req, res) => {
   const { type, message } = await loginService.login(email, password);
 
   if (type) return res.status(400).json(message);
-
-  return res.status(200).json(message);
+  console.log(message.dataValues);
+  return res.status(200).json(criandoToken(message.dataValues));
 };
 
 module.exports = {
+  criandoToken,
   login,
   getAll,
 };
