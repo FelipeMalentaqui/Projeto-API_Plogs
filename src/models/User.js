@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
   });
 
-  User.associate = (models) => {
-    User.hasMany(models.BlogPost,
-      { foreignKey: 'userId',  // quem que eu tenho que colocar nessa foreignKey? | coluna  referente BlogPost
-      as: 'blog_posts' // quem eu tenho que colocar no as ? | apelido do meu BlogPost
-    });
-  }
+  // User.associate = (models) => {
+  //   User.hasMany(models.BlogPost,
+  //     { foreignKey: 'userId',  // quem que eu tenho que colocar nessa foreignKey? | coluna  referente BlogPost
+  //     as: 'blog_posts' // quem eu tenho que colocar no as ? | apelido do meu BlogPost
+  //   });
+  // }
 
   return User;
 };
