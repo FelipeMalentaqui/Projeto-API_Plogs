@@ -6,7 +6,7 @@ const createPost = async (req, res) => {
 
   if (type) return res.status(400).json({ message });
 
-  return res.status(201).json({ message });
+  return res.status(201).json(message);
 };
 
 const getAll = async (req, res) => {
