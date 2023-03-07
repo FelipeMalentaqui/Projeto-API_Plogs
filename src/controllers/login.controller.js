@@ -1,27 +1,19 @@
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
-const {
-  loginService,
-} = require('../services');
+const { loginService } = require('../services');
+const criandoToken = require('../utils/criandoToken');
 
-const {
-  JWT_SECRET,
-} = process.env;
+// const { JWT_SECRET } = process.env;
 
-const criandoToken = (dadoObjeto) => {
-  const jwtConfig = {
-    expiresIn: '10d',
-    algorithm: 'HS256',
-  };
+// const criandoToken = (dadoObjeto) => {
+//   const jwtConfig = { expiresIn: '10d', algorithm: 'HS256' };
 
-  const payload = {
-    email: dadoObjeto.email,
-  };
+//   const payload = { email: dadoObjeto.email };
 
-  const token = { token: jwt.sign(payload, JWT_SECRET, jwtConfig) };
+//   const token = { token: jwt.sign(payload, JWT_SECRET, jwtConfig) };
 
-  return token;
-};
+//   return token;
+// };
 
 const getAll = async (req, res) => {
   const usuariosCadastrado = await loginService.getAll();

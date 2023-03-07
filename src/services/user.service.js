@@ -9,7 +9,7 @@ const createdUser = async (displayName, email, password, image) => {
     where: { email },
   });
 
-  if (emailUser === email) return { type: 'erro', message: 'User already registered' };
+  if (emailUser) return { type: 'ALREADY_REGISTERED', message: 'User already registered' };
 
   const newUser = await User.create({ displayName, email, password, image });
 

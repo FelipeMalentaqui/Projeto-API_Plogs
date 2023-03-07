@@ -7,8 +7,8 @@ const Joi = require('joi');
 
 const validateUserSchema = Joi.object({
   displayName: Joi.string().min(8).required(),
-  password: Joi.number().min(6).required(),
-  image: Joi.string().required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).required(),
 });
 
 module.exports = {
