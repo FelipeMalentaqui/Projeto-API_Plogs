@@ -23,14 +23,17 @@ const getAll = async () => {
   const listAll = await User.findAll(
     // where: { displayName, email, image },
     // { fields: ['displayName', 'email', 'image'] },
-    { attributes: ['displayName', 'email', 'image'] },
+    { attributes: ['id', 'displayName', 'email', 'image'] },
     );
     
   return listAll;
 };
+  // displayName, email, password, image
 
 const getById = async (id) => {
-  const listId = await User.findByPk(id);
+  const listId = await User.findOne({ where: { id }, attributes: { exclude: ['password'] } });
+
+  console.log(listId, 'id aqui');
 
   if (!listId) return { type: 'NOT_EXIST', message: 'User does not exist' };
 
