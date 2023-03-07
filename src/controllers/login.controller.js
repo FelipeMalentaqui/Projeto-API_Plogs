@@ -15,11 +15,10 @@ const criandoToken = (dadoObjeto) => {
   };
 
   const payload = {
-    id: dadoObjeto.id,
     email: dadoObjeto.email,
   };
 
-  const token = jwt.sign(payload, JWT_SECRET, jwtConfig);
+  const token = { token: jwt.sign(payload, JWT_SECRET, jwtConfig) };
 
   return token;
 };
@@ -35,8 +34,10 @@ const login = async (req, res) => {
 
   const { type, message } = await loginService.login(email, password);
 
-  if (type) return res.status(400).json(message);
-  console.log(message.dataValues);
+  if (type) return res.status(400).json({ message });
+
+  // console.log(message.dataValues);
+
   return res.status(200).json(criandoToken(message.dataValues));
 };
 

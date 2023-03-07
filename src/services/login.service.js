@@ -17,6 +17,11 @@ const login = async (email, password) => {
     return { type: 'INVALID_FIELDS', message: 'Invalid fields' };
   }
 
+  // if (usuario === undefined) {
+  //   // console.log(usuario, 'erro');
+  //   return { type: 'INVALID_FIELDS', message: 'Invalid fields' };
+  // }
+
   return { type: null, message: usuario };
 };
 
