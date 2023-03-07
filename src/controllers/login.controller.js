@@ -1,11 +1,11 @@
 // const jwt = require('jsonwebtoken');
 
 const { loginService } = require('../services');
-const criandoToken = require('../utils/criandoToken');
+const { createToken } = require('../utils/criandoToken');
 
 // const { JWT_SECRET } = process.env;
 
-// const criandoToken = (dadoObjeto) => {
+// const criandoToken2 = (dadoObjeto) => {
 //   const jwtConfig = { expiresIn: '10d', algorithm: 'HS256' };
 
 //   const payload = { email: dadoObjeto.email };
@@ -28,13 +28,13 @@ const login = async (req, res) => {
 
   if (type) return res.status(400).json({ message });
 
-  // console.log(message.dataValues);
+  console.log(message.dataValues);
 
-  return res.status(200).json(criandoToken(message.dataValues));
+  return res.status(200).json(createToken(message.dataValues));
 };
 
 module.exports = {
-  criandoToken,
+  // criandoToken,
   login,
   getAll,
 };

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const { loginService } = require('../services');
+const { userService } = require('../services');
 
 const { JWT_SECRET } = process.env;
 
@@ -14,15 +14,15 @@ module.exports = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    const user = await loginService.login(decoded.data.email);
+    const user = await userService.getById(decoded.id);
     
     if (!user) {
       return res.status(401).json({ message: 'Expired or invalid token' });
     }
-    req.user = user;
+    req.user = user.dataValues;
 
     next();
   } catch (err) {
-    return res.status(401).json({ message: err.message });
+    return res.status(401).json({ message: 'Expired or invalid token' });
   }
   };

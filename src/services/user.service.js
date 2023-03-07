@@ -12,13 +12,20 @@ const createdUser = async (displayName, email, password, image) => {
   if (emailUser) return { type: 'ALREADY_REGISTERED', message: 'User already registered' };
 
   const newUser = await User.create({ displayName, email, password, image });
+  // console.log(newUser, 'user');
 
-  return { type: null, message: newUser };
+  // await newUser.save({ fields: ['displayName', 'email', 'image'] });
+
+  return { type: null, user: newUser };
 };
 
 const getAll = async () => {
-  const listAll = await User.findAll();
-
+  const listAll = await User.findAll(
+    // where: { displayName, email, image },
+    // { fields: ['displayName', 'email', 'image'] },
+    { attributes: ['displayName', 'email', 'image'] },
+    );
+    
   return listAll;
 };
 
