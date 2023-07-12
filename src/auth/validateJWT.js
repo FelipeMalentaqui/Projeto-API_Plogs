@@ -20,8 +20,9 @@ module.exports = async (req, res, next) => {
       return res.status(401).json({ message: 'Expired or invalid token' });
     }
 
-    console.log(user, 'user validateJWT');
     req.user = user.dataValues;
+    // req.user = decoded;
+    console.log('****************', user, '*************');
 
     next();
   } catch (err) {
